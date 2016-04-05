@@ -1,5 +1,6 @@
 package cn.com.test.encrypt.dsa;
 
+import java.io.ByteArrayOutputStream;
 import java.security.Key;   
 import java.security.KeyFactory;   
 import java.security.KeyPair;   
@@ -123,7 +124,9 @@ public abstract class DSACoder extends Coder {
         KeyPair keys = keygen.genKeyPair();   
   
         PublicKey publicKey = keys.getPublic();
-        PrivateKey privateKey = keys.getPrivate();   
+        PrivateKey privateKey = keys.getPrivate();  
+        
+        System.out.println(encryptBASE64(publicKey.getEncoded()));
   
         Map<String, Object> map = new HashMap<String, Object>(2);   
         map.put(PUBLIC_KEY, publicKey);   
