@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>数据请求测试</title>
+        <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+        <script src="../unit/crypto-js-develop/src/core.js"></script>
+        <!-- <script src="../unit/crypto-js-develop/src/x64-core.js"></script> -->
+        <!-- <script src="../unit/crypto-js-develop/src/enc-utf16.js"></script> -->
+        <script src="../unit/crypto-js-develop/src/enc-base64.js"></script>
+        <!-- <script src="../unit/crypto-js-develop/src/md5.js"></script>
+        <script src="../unit/crypto-js-develop/src/sha1.js"></script>
+        <script src="../unit/crypto-js-develop/src/sha256.js"></script>
+        <script src="../unit/crypto-js-develop/src/sha512.js"></script>
+        <script src="../unit/crypto-js-develop/src/sha3.js"></script>
+        <script src="../unit/crypto-js-develop/src/hmac.js"></script>
+        <script src="../unit/crypto-js-develop/src/pbkdf2.js"></script> -->
+        <!-- <script src="../unit/crypto-js-develop/src/evpkdf.js"></script> -->
+        <script src="../unit/crypto-js-develop/src/cipher-core.js"></script>
+        <!-- <script src="../unit/crypto-js-develop/src/mode-cfb.js"></script>
+        <script src="../unit/crypto-js-develop/src/mode-ctr.js"></script>
+        <script src="../unit/crypto-js-develop/src/mode-ofb.js"></script>
+        <script src="../unit/crypto-js-develop/src/mode-ecb.js"></script> -->
+        <!-- <script src="../unit/crypto-js-develop/src/pad-ansix923.js"></script> -->
+        <!-- <script src="../unit/crypto-js-develop/src/pad-iso10126.js"></script>
+        <script src="../unit/crypto-js-develop/src/pad-zeropadding.js"></script> -->
+        <!-- <script src="../unit/crypto-js-develop/src/pad-iso97971.js"></script> -->
+        <!-- <script src="../unit/crypto-js-develop/src/pad-nopadding.js"></script> -->
+        <!-- <script src="../unit/crypto-js-develop/src/rc4.js"></script>
+        <script src="../unit/crypto-js-develop/src/rabbit.js"></script> -->
+        <script src="../unit/crypto-js-develop/src/aes.js"></script>
+        <!-- <script src="../unit/crypto-js-develop/src/tripledes.js"></script> -->
+        <script type="text/javascript">
+			function Encrypt(word){  
+	            var key = CryptoJS.enc.Utf8.parse("0102030405060708");   
+	            var iv  = CryptoJS.enc.Utf8.parse('0102030405060708');   
+	            var srcs = CryptoJS.enc.Utf8.parse(word);  
+	            var encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv,mode:CryptoJS.mode.CBC});  
+	            return encrypted.toString();  
+			}  
+			function Decrypt(word){  
+	            var key = CryptoJS.enc.Utf8.parse("0102030405060708");   
+	            var iv  = CryptoJS.enc.Utf8.parse('0102030405060708');   
+	            var srcs =word;
+	            var decrypt = CryptoJS.AES.decrypt(srcs, key, { iv: iv,mode:CryptoJS.mode.CBC});  
+	            //return CryptoJS.enc.Utf8.stringify(encrypted).toString();
+	            return decrypt.toString(CryptoJS.enc.Utf8);
+            }  
+			jQuery(document).ready(function() {
+				var t=Encrypt('abcedxxxxxxx')
+                jQuery("#diy").text(t);
+				jQuery("#diy").append("<br/>"+Decrypt(t));
+            });
+        </script>
+        <style type="text/css">
+        </style>
+    </head>
+    <body>
+        <div id="diy"></div>
+    </body>
+</html>
