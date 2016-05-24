@@ -22,14 +22,14 @@ public class Base64Util {
         return Base64.decodeBase64(data); 
     }*/
 	public static String base64Encode(String data) throws UnsupportedEncodingException{  
-        return new String(Base64.encodeBase64URLSafe(data.getBytes()),"UTF-8");
+        return new String(Base64.encodeBase64URLSafe(data.getBytes("UTF-8")),"UTF-8");
     } 
 	public static String base64EncodeByByte(byte[] data) throws UnsupportedEncodingException{  
         return new String(Base64.encodeBase64URLSafe(data),"UTF-8");  
     } 
 	//base64解密
-    public static byte[] base64Decode(String data){  
-        return new Base64().decode(data.getBytes());
+    public static byte[] base64Decode(String data) throws UnsupportedEncodingException{  
+        return new Base64().decode(data.getBytes("UTF-8"));
     }  
     public static byte[] base64DecodeByByte(byte[] data){
         return Base64.decodeBase64(data); 

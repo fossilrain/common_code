@@ -21,7 +21,7 @@ public class AESUtil {
 			System.out.print("Key长度不是16位");    
 			return null;    
 		} 
-		byte[] raw = sKey.getBytes();    
+		byte[] raw = sKey.getBytes("UTF-8");    
 		SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
 		byte[]b=Base64.encodeBase64URLSafe(skeySpec.getEncoded());
 		return new String(b,"UTF-8");
@@ -30,7 +30,7 @@ public class AESUtil {
 	//生成key对象
 	public static SecretKeySpec toKey(String sKey) throws Exception{
 		if(sKey != null && sKey.length() > 0){
-			byte[]b=new Base64().decode(sKey.getBytes());
+			byte[]b=new Base64().decode(sKey.getBytes("UTF-8"));
 			//byte[]b=Base64Util.base64Decode(sKey);
 			return new SecretKeySpec(b,"AES");
 		}
@@ -42,7 +42,7 @@ public class AESUtil {
 		if(skeySpec != null){
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");//"算法/模式/补码方式"
 			//IvParameterSpec iv = new IvParameterSpec("0132030305060708".getBytes());//使用CBC模式，需要一个向量iv，可增加加密算法的强度    
-			IvParameterSpec iv = new IvParameterSpec(new Base64().decode(sKey.getBytes()));//使用CBC模式，需要一个向量iv，可增加加密算法的强度    
+			IvParameterSpec iv = new IvParameterSpec(new Base64().decode(sKey.getBytes("UTF-8")));//使用CBC模式，需要一个向量iv，可增加加密算法的强度    
 			cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);    
 			//byte[] encrypted = cipher.doFinal(sSrc.getBytes());    
 			byte[] encrypted = cipher.doFinal(Base64.encodeBase64URLSafe(sSrc.getBytes("UTF-8"))); 
@@ -57,9 +57,9 @@ public class AESUtil {
 		if(skeySpec != null){
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");    
 			//IvParameterSpec iv = new IvParameterSpec("0132030305060708".getBytes());  
-			IvParameterSpec iv = new IvParameterSpec(new Base64().decode(sKey.getBytes()));
+			IvParameterSpec iv = new IvParameterSpec(new Base64().decode(sKey.getBytes("UTF-8")));
 			cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);    
-			byte[] encrypted1 = new Base64().decode(sSrc.getBytes());//先用bAES64解密    
+			byte[] encrypted1 = new Base64().decode(sSrc.getBytes("UTF-8"));//先用bAES64解密    
 			byte[] original = cipher.doFinal(encrypted1);  
 			//String originalString = new String(original,"UTF-8");   
 			String originalString = new String(new Base64().decode(original),"UTF-8"); 
