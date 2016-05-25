@@ -1,0 +1,3 @@
+PL/SQL tnsnames.ora环境变量配置：
+	变量名：tns_admin
+	变量值：D:\pf\oracleEX\app\oracle\product\11.2.0\server\network\ADMIN
