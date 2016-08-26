@@ -50,7 +50,7 @@ public class IpUtil {
 				if (ip != null && ip instanceof Inet4Address) {
 					//System.out.println("本机的IP = " + ip.getHostAddress());
 					ipStr=ip.getHostAddress();
-					if("127.0.01".equals(ipStr)){
+					if("127.0.0.1".equals(ipStr)){
 						continue;
 					}
 				}
